@@ -1,11 +1,17 @@
-apiVersion:eksctl.io/v1alpha5
+apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
+
 metadata:
   name: eksctl-cluster
   region: us-east-1
-nodeGroups:
+
+managedNodeGroups:
   - name: ng-1-dev
-    instanceType: ["t3.medium", "m5.large", "c5.large", "t3.small"]
+    instanceTypes:
+      - t3.medium
+      - m5.large
+      - c5.large
+      - t3.small
     desiredCapacity: 2
     spot: true
     ssh:
