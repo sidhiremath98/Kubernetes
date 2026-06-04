@@ -3,7 +3,7 @@ kind: ClusterConfig
 
 metadata:
   name: eksctl-cluster
-  region: us-east-1
+  region: ap-south-1
 
 managedNodeGroups:
   - name: ng-1-dev
