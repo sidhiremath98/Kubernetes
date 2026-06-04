@@ -12,4 +12,4 @@ managedNodeGroups:
     spot: true
     ssh:
       allow: true
-      publicKeyName: eks-keyg
+      publicKeyName: eks-key
