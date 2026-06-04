@@ -7,13 +7,9 @@ metadata:
 
 managedNodeGroups:
   - name: ng-1-dev
-    instanceTypes:
-      - t3.medium
-      - m5.large
-      - c5.large
-      - t3.small
+    instanceType: t3.medium
     desiredCapacity: 2
     spot: true
     ssh:
       allow: true
-      publicKeyPath: ~/.ssh/id_rsa.pub
+      publicKeyName: eks-keyg
