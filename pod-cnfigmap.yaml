@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod-with-configmap
+  namespace: dev-namespace
+  labels:
+    app: configmap-app
+    environment: dev
+    project: eksctl-cluster-development   
+spec:
+  containers:
+  - name: maria-db
+    image: mariadb
+    envFrom:
+    - configMapRef:
+        name: pod-config
