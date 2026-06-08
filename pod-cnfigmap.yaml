@@ -9,8 +9,8 @@ metadata:
     project: eksctl-cluster-development   
 spec:
   containers:
-  - name: maria-db
-    image: mariadb
+  - name: nginx
+    image: nginx
     envFrom:
     - configMapRef:
         name: pod-config
