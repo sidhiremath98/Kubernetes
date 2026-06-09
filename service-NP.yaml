@@ -5,6 +5,11 @@ metadata:
 spec:
   selector:
     app: nginx
+    environment: dev
+    component: web
+    tier: frontend
+    project: eksctl-cluster-development
+    purpose: nodeport-service
   ports:
     - protocol: TCP
       port: 80 # The port that the service will listen on
