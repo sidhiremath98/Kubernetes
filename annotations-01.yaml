@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  # Annotations on the Deployment — for tools, docs, and integrations
+  annotations:
+    description: "Nginx web server for the frontend app"
+    owner: "backend-team"
+    contact: "backend@example.com"
+    version: "1.0.0"
+    git-repo: "https://github.com/myorg/nginx-app"
+    deployment-date: "2024-06-09"
+    # ArgoCD annotation example
+    argocd.argoproj.io/sync-wave: "1"
+    # Prometheus scraping annotation
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
+ 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+ 
+  template:
+    metadata:
+      labels:
+        app: nginx
+      # Annotations on each Pod
+      annotations:
+        description: "Nginx pod for frontend"
+        owner: "backend-team"
+        # AWS IAM role annotation (used by IRSA)
+        eks.amazonaws.com/role-arn: "arn:aws:iam::123456789:role/my-role"
+ 
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          # Annotations on the container (not standard, but can be used by tools)
+          env:
+            - name: ENVIRONMENT
+              value: "production" 
+            - name: PROJECT
+              value: "eksctl-cluster-development" 
