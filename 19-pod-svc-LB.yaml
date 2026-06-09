@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-lb-pod
+  namespace: dev-namespace
+  labels:
+    app: nginx-lb
+    environment: dev
+    component: web
+    tier: frontend
+    project: eksctl-cluster-development
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 8080
