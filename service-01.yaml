@@ -12,5 +12,5 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 80 # The port that the service will listen on
+      targetPort: 8080 # The port that the container is listening on
