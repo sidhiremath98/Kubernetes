@@ -4,7 +4,7 @@ metadata:
   name: nginx-np-service
 spec:
   selector:
-    app: nginx
+    app: nginx-np
     environment: dev
     component: web
     tier: frontend
