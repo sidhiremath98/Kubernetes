@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  # Labels on the Deployment itself
+  labels:
+    app: nginx
+    env: production
+    team: backend
+    version: "1.0"
+
+spec:
+  replicas: 2
+  # Selector uses labels to find and manage pods
+  selector:
+    matchLabels:
+      app: nginx
+      env: production
+
+  template:
+    metadata:
+      # Labels on each Pod created by this Deployment
+      labels:
+        app: nginx
+        env: production
+        team: backend
+        version: "1.0"
+
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80

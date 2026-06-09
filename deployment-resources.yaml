@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+
+          resources:
+            # Requests — minimum guaranteed resources
+            # Kubernetes uses this to decide which node to place the pod on
+            requests:
+              cpu: "250m"       # 250 millicores = 0.25 of a CPU core
+              memory: "128Mi"   # 128 Mebibytes of RAM
+
+            # Limits — maximum resources the container can use
+            # If CPU exceeds limit → container is throttled
+            # If Memory exceeds limit → container is killed (OOMKilled)
+            limits:
+              cpu: "500m"       # 500 millicores = 0.5 of a CPU core
+              memory: "256Mi"   # 256 Mebibytes of RAM
+
+        # Example: A sidecar container with different resource needs
+        - name: log-collector
+          image: fluentd:latest
+          resources:
+            requests:
+              cpu: "100m"       # lightweight sidecar needs less CPU
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
