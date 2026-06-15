@@ -30,3 +30,15 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+      readinessProbe:
+        httpGet:
+          path: /readyiness
+          port: 80
+        initialDelaySeconds: 10   #wait for 10 seconds before starting the readiness probe
+        periodSeconds: 5     #check every 5 seconds
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 80
+        initialDelaySeconds: 10  #wait for 10 seconds before starting the liveness probe
+        periodSeconds: 5 #check every 5 seconds
