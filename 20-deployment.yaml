@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
+  # these are replica set labels, not pod labels
+  labels:
+    app: nginx-app
+    environment: dev
+    project: eksctl-cluster-development
+    purpose: deployment
+spec:
+  replicas: 3
+  selector:
+   # this is the label selector for the pods, not the deployment
+    matchLabels:
+      app: nginx-app
+      purpose: deployment
+      project: eksctl-cluster-development
+  # pod definition template
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+        purpose: deployment
+        project: eksctl-cluster-development
+
+    spec:
+      containers:
+      - name: nginx-app
+        image: nginx:latest
+        ports:
+        - containerPort: 80
